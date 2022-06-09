@@ -35,13 +35,17 @@
         <img src="./img/logo-small.svg" alt="spotify logo">
       </div>
   
-      <select name="genre-select" v-model="selectedGenre">
+      <select 
+        name="genre-select" 
+        v-model="selectedGenre"
+        @change="getApi()"
+      >
   
-        <option value="none">Seleziona un genere</option>
+        <option value="genre=none">Seleziona un genere</option>
   
         <option 
           v-for="genre in genres" 
-          :value="genre"
+          :value="`genre=${genre}`"
         >
           {{genre}}
         </option>
@@ -52,13 +56,14 @@
         name="artist-select" 
         v-model="selectedAuthor" 
         class="mx-3"
+        @change="getApi()"
       >
   
-        <option value="none">Seleziona un'artista</option>
+        <option value="author=none">Seleziona un'artista</option>
   
         <option 
           v-for="author in authors" 
-          :value="author"
+          :value="`author=${author}`"
         >
           {{author}}
         </option>
@@ -87,11 +92,11 @@
   
       <div class="container d-flex flex-wrap">
 
-        <div class="text-white" v-show="filteredDisks.length === 0">
+        <div class="text-white" v-show="disks.length === 0">
           <h2>Non sono presenti dischi con questi filtri di ricerca</h2>
         </div>
   
-        <div class="mb-card" v-for="disk in filteredDisks">
+        <div class="mb-card" v-for="disk in disks">
 
           <div class="thumb">
             <img :src="disk.poster">

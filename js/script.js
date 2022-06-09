@@ -5,13 +5,13 @@ const app = new Vue({
     disks: [],
     genres: [],
     authors: [],
-    selectedGenre: 'none',
-    selectedAuthor: 'none',
+    selectedGenre: 'genre=none',
+    selectedAuthor: 'author=none',
     isLoaded: false
   },
   methods:{
     getApi(){
-      axios.get(this.apiUrl)
+      axios.get(this.apiUrl + '?' + this.selectedGenre + '&' + this.selectedAuthor)
       .then(response =>{
         this.disks = response.data;
         console.log('Dischi', this.disks);
@@ -34,25 +34,6 @@ const app = new Vue({
       console.log('Lista generi', this.genres);
       console.log('Lista autori', this.authors);
     },
-  },
-  computed: {
-    filteredDisks() {
-      let filteredArray = [];
-      if (this.selectedGenre === 'none') {
-        filteredArray = this.disks;
-      } else {
-        filteredArray = this.disks.filter(disk => {
-          return disk.genre.toLowerCase().includes(this.selectedGenre.toLowerCase());
-        });
-      }
-      if (this.selectedAuthor != 'none') {
-        filteredArray = filteredArray.filter(disk => {
-          return disk.author.toLowerCase().includes(this.selectedAuthor.toLowerCase());
-        });
-      }
-      console.log('array filtro genere e filtro artista', filteredArray);
-      return filteredArray;
-    }
   },
   mounted(){
     this.getApi();
