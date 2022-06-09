@@ -17,6 +17,8 @@ const app = new Vue({
         console.log('Dischi', this.disks);
         if(this.disks.length === response.data.length){
           this.isLoaded = true;
+        }
+        if(this.genres.length === 0 && this.authors.length === 0){
           this.getGenresAndAuthors();
         }
       })
