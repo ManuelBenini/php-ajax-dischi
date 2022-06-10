@@ -41,11 +41,11 @@
         @change="getApi()"
       >
   
-        <option value="genre=none">Seleziona un genere</option>
+        <option value="none">Seleziona un genere</option>
   
         <option 
           v-for="genre in genres" 
-          :value="`genre=${genre}`"
+          :value="`${genre}`"
         >
           {{genre}}
         </option>
@@ -59,11 +59,11 @@
         @change="getApi()"
       >
   
-        <option value="author=none">Seleziona un'artista</option>
+        <option value="none">Seleziona un'artista</option>
   
         <option 
           v-for="author in authors" 
-          :value="`author=${author}`"
+          :value="`${author}`"
         >
           {{author}}
         </option>

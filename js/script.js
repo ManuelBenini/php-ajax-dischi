@@ -5,13 +5,18 @@ const app = new Vue({
     disks: [],
     genres: [],
     authors: [],
-    selectedGenre: 'genre=none',
-    selectedAuthor: 'author=none',
+    selectedGenre: 'none',
+    selectedAuthor: 'none',
     isLoaded: false
   },
   methods:{
     getApi(){
-      axios.get(this.apiUrl + '?' + this.selectedGenre + '&' + this.selectedAuthor)
+      axios.get(this.apiUrl, {
+        params: {
+          genre: this.selectedGenre,
+          author: this.selectedAuthor
+        }
+      })
       .then(response =>{
         this.disks = response.data;
         console.log('Dischi', this.disks);
