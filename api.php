@@ -2,8 +2,8 @@
 
   require_once __DIR__ . '/db.php';
   
-  $genre = strtolower($_GET['genre']) ?? 'none';
-  $author = strtolower($_GET['author']) ?? 'none';
+  $genre = empty($_GET['genre']) ? 'none' : strtolower($_GET['genre']);
+  $author = empty($_GET['author']) ? 'none' : strtolower($_GET['author']);
 
   if($genre === 'none'){
     $filteredArray = $disks;
